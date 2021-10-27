@@ -1,10 +1,10 @@
 ﻿namespace ArrangeElements.ViewModel
 {
+  using ArrangeElements.Model.Enums;
+  using ArrangeElements.ViewModel.Commands;
   using System.Collections.ObjectModel;
   using System.Linq;
   using System.Windows.Input;
-  using ArrangeElements.Model.Enums;
-  using ArrangeElements.ViewModel.Commands;
 
   public sealed class MainViewModel : NotifyPropertyChanged
   {
@@ -68,7 +68,7 @@
         new ConnectionViewModel(Elements.ElementAt(15),Elements.ElementAt(16)),//l2 - t2
       };
 
-      ArrangeCommand = new ArrangeCommand(Elements, Connections, _ => { });
+      ArrangeCommand = new ArrangeCommand(Elements, Connections);
     }
 
     public ObservableCollection<ElementViewModel> Elements { get; set; }

@@ -41,9 +41,12 @@
   </UserControl.Resources>
 
   <Grid>
+
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 
       <Grid x:Name="Container" Background="Transparent">
+
+
         <behaviors:Interaction.Behaviors>
           <behavior:ZoomBehavior />
         </behaviors:Interaction.Behaviors>

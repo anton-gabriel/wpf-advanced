@@ -1,30 +1,17 @@
 ﻿namespace ArrangeElements
 {
+
   using System;
-  using System.Threading.Tasks;
   using System.Windows.Input;
 
   public abstract class RelayCommand<T> : ICommand where T : class
   {
-    private readonly Action<Exception> _OnException;
+    public abstract void ExecuteCommand(T parameter);
 
-    protected RelayCommand(Action<Exception> onException)
+    public virtual bool CanExecuteCommand(T parameter)
     {
-      _OnException = onException;
+      return true;
     }
-
-    private bool _isExecuting;
-    public bool IsExecuting
-    {
-      get => _isExecuting;
-      set
-      {
-        _isExecuting = value;
-        CanExecuteChanged?.Invoke(this, new EventArgs());
-      }
-    }
-
-    protected abstract Task ExecuteAsync(object parameter);
 
     public void RaiseCanExecuteChanged()
     {
@@ -36,23 +23,11 @@
 
     public bool CanExecute(object parameter)
     {
-      return !IsExecuting;
+      return CanExecuteCommand(parameter as T);
     }
-
-    public async void Execute(object parameter)
+    public void Execute(object parameter)
     {
-      IsExecuting = true;
-
-      try
-      {
-        await ExecuteAsync(parameter);
-      }
-      catch (Exception ex)
-      {
-        _OnException?.Invoke(ex);
-      }
-
-      IsExecuting = false;
+      ExecuteCommand(parameter as T);
     }
     #endregion
   }
