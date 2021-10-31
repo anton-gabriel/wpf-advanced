@@ -1,4 +1,4 @@
-﻿namespace ArrangeElements.View
+﻿namespace Graph.View
 {
   using System;
   using System.Collections.Generic;
