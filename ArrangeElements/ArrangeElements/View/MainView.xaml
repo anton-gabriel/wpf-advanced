@@ -16,33 +16,44 @@
   mc:Ignorable="d">
 
   <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <convertes:InstanceTypeConverter x:Key="InstanceTypeConverter" />
 
-    <convertes:InstanceTypeConverter x:Key="InstanceTypeConverter" />
+      <DataTemplate DataType="{x:Type vm:ElementViewModel}">
+        <local:ElementView>
+          <behaviors:Interaction.Behaviors>
+            <behavior:DragBehavior />
+          </behaviors:Interaction.Behaviors>
+        </local:ElementView>
+      </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ElementViewModel}">
-      <local:ElementView>
-        <behaviors:Interaction.Behaviors>
-          <behavior:DragBehavior />
-        </behaviors:Interaction.Behaviors>
-      </local:ElementView>
-    </DataTemplate>
+      <DataTemplate DataType="{x:Type vm:ConnectionViewModel}">
+        <local:ConnectionView />
+      </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ConnectionViewModel}">
-      <local:ConnectionView />
-    </DataTemplate>
+      <CollectionViewSource x:Key="Elements" Source="{Binding Path=Elements, Mode=OneWay}" />
+      <CollectionViewSource x:Key="Connections" Source="{Binding Path=Connections, Mode=OneWay}" />
 
-    <CollectionViewSource x:Key="Elements" Source="{Binding Path=Elements, Mode=OneWay}" />
-    <CollectionViewSource x:Key="Connections" Source="{Binding Path=Connections, Mode=OneWay}" />
-
-    <CompositeCollection x:Key="ItemsCollection">
-      <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=Elements}}" />
-      <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=Connections}}" />
-    </CompositeCollection>
+      <CompositeCollection x:Key="ItemsCollection">
+        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=Elements}}" />
+        <CollectionContainer Collection="{Binding Source={StaticResource ResourceKey=Connections}}" />
+      </CompositeCollection>
+    </ResourceDictionary>
   </UserControl.Resources>
 
   <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+      Grid.Row="0"
+      HorizontalScrollBarVisibility="Auto"
+      VerticalScrollBarVisibility="Auto">
 
       <Grid x:Name="Container" Background="Transparent">
 
@@ -73,6 +84,51 @@
         </ItemsControl>
       </Grid>
     </ScrollViewer>
+
+    <Grid Grid.Row="1">
+      <Grid
+        x:Name="LogGrid"
+        Grid.Row="1"
+        Height="25"
+        Background="{StaticResource ResourceKey=BrushGray1}">
+        <behaviors:Interaction.Triggers>
+          <behaviors:EventTrigger EventName="MouseDown">
+            <behaviors:InvokeCommandAction Command="{Binding Path=ToggleTooltipCommand, Mode=OneWay}" />
+          </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
+        <TextBlock
+          Margin="5,0,0,0"
+          VerticalAlignment="Center"
+          FontWeight="Bold"
+          Foreground="{StaticResource ResourceKey=BrushWhite1}"
+          Text="Log" />
+
+      </Grid>
+
+      <Popup
+        AllowsTransparency="True"
+        HorizontalOffset="5"
+        IsOpen="{Binding Path=ShowTooltip, Mode=OneWay}"
+        Placement="Top"
+        PlacementTarget="{Binding ElementName=LogGrid}"
+        PopupAnimation="Fade"
+        VerticalOffset="-5">
+        <behaviors:Interaction.Triggers>
+          <behaviors:EventTrigger EventName="MouseLeave">
+            <behaviors:InvokeCommandAction Command="{Binding Path=HideTooltipCommand, Mode=OneWay}" />
+          </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
+        <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto">
+          <Grid
+            Width="300"
+            Height="800"
+            Background="{StaticResource ResourceKey=BrushWhite5}">
+            <TextBlock Text="Show" />
+          </Grid>
+        </ScrollViewer>
+
+      </Popup>
+    </Grid>
   </Grid>
 
 </UserControl>

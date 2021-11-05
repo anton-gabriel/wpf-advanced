@@ -12,19 +12,56 @@
   Height="750"
   d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
                                    IsDesignTimeCreatable=False}"
-  Background="#33363F"
+  ResizeMode="CanResize"
+  WindowStartupLocation="CenterScreen"
+  WindowState="Normal"
+  WindowStyle="None"
   mc:Ignorable="d">
+
+  <WindowChrome.WindowChrome>
+    <WindowChrome
+      CaptionHeight="0"
+      CornerRadius="0"
+      GlassFrameThickness="0" />
+  </WindowChrome.WindowChrome>
+
+
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="View/Colors.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+
+  <Window.Style>
+    <Style TargetType="{x:Type Window}">
+      <Setter Property="Background" Value="{StaticResource ResourceKey=BrushGray2}" />
+    </Style>
+  </Window.Style>
+
+
   <Grid>
     <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
       <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <view:MainView Grid.Row="0" />
-    <Button
-      Grid.Row="1"
-      Command="{Binding Path=ArrangeCommand, Mode=OneWay}"
-      Content="Arrange" />
+    <!--  Header  -->
+    <Grid
+      x:Name="Header"
+      Grid.Row="0"
+      Height="25"
+      Background="{StaticResource ResourceKey=BrushWhite5}">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+
+    </Grid>
+
+    <view:MainView Grid.Row="1" />
+
   </Grid>
 
 </Window>

@@ -48,59 +48,58 @@
 
 
   <Grid>
-    <Ellipse
+    <Grid.Style>
+      <Style TargetType="{x:Type Grid}">
+        <Setter Property="BitmapEffect">
+          <Setter.Value>
+            <DropShadowBitmapEffect
+              Direction="0"
+              Opacity="0.75"
+              ShadowDepth="0"
+              Softness="0.25"
+              Color="#9DD2CD" />
+          </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter Property="BitmapEffect">
+              <Setter.Value>
+                <DropShadowBitmapEffect
+                  Direction="0"
+                  Opacity="0.75"
+                  ShadowDepth="0"
+                  Softness="0.25"
+                  Color="#D5EBE9" />
+              </Setter.Value>
+            </Setter>
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+    </Grid.Style>
+    <Grid.ToolTip>
+      <ToolTip>
+        <ToolTip.ContentTemplate>
+          <DataTemplate>
+            <Grid DataContext="{Binding Source={StaticResource ResourceKey=BindingProxy}, Path=Data}">
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <TextBlock Grid.Row="0" Text="{Binding Path=Category, StringFormat=Category: {0}}" />
+              <TextBlock Grid.Row="1" Text="{Binding Path=Id, StringFormat=ID: {0}}" />
+              <TextBlock Grid.Row="2" Text="{Binding Path=X, StringFormat=X: {0}}" />
+              <TextBlock Grid.Row="3" Text="{Binding Path=Y, StringFormat=Y: {0}}" />
+            </Grid>
+          </DataTemplate>
+        </ToolTip.ContentTemplate>
+      </ToolTip>
+    </Grid.ToolTip>
+    <Grid
       Width="30"
       Height="30"
-      Fill="{Binding Path=Category, Mode=OneWay, Converter={StaticResource ResourceKey=CategoryColorConverter}}"
-      Stroke="Black"
-      StrokeThickness="1">
-      <Ellipse.ToolTip>
-        <ToolTip>
-          <ToolTip.ContentTemplate>
-            <DataTemplate>
-              <Grid DataContext="{Binding Source={StaticResource ResourceKey=BindingProxy}, Path=Data}">
-                <Grid.RowDefinitions>
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                  <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Path=Category, StringFormat=Category: {0}}" />
-                <TextBlock Grid.Row="1" Text="{Binding Path=Id, StringFormat=ID: {0}}" />
-                <TextBlock Grid.Row="2" Text="{Binding Path=X, StringFormat=X: {0}}" />
-                <TextBlock Grid.Row="3" Text="{Binding Path=Y, StringFormat=Y: {0}}" />
-              </Grid>
-            </DataTemplate>
-          </ToolTip.ContentTemplate>
-        </ToolTip>
-      </Ellipse.ToolTip>
-      <Ellipse.Style>
-        <Style TargetType="{x:Type Ellipse}">
-          <Setter Property="BitmapEffect">
-            <Setter.Value>
-              <DropShadowBitmapEffect
-                Direction="0"
-                ShadowDepth="00"
-                Softness="1"
-                Color="#9DD2CD" />
-            </Setter.Value>
-          </Setter>
-          <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-              <Setter Property="BitmapEffect">
-                <Setter.Value>
-                  <DropShadowBitmapEffect
-                    Direction="0"
-                    ShadowDepth="00"
-                    Softness="1"
-                    Color="#D5EBE9" />
-                </Setter.Value>
-              </Setter>
-            </Trigger>
-          </Style.Triggers>
-        </Style>
-      </Ellipse.Style>
-    </Ellipse>
+      Background="{Binding Path=Category, Mode=OneWay, Converter={StaticResource ResourceKey=CategoryColorConverter}}" />
 
     <TextBlock
       HorizontalAlignment="Center"

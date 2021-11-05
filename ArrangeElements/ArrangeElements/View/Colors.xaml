@@ -3,6 +3,11 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:local="clr-namespace:ArrangeElements.View">
 
-  <SolidColorBrush x:Key="Red1" Color="Red" />
+  <SolidColorBrush x:Key="Red1" Color="#F42C04" />
+  <SolidColorBrush x:Key="BrushBlack1" Color="#000000" />
+  <SolidColorBrush x:Key="BrushWhite1" Color="#FAFAFA" />
+  <SolidColorBrush x:Key="BrushWhite5" Color="#E1E1E1" />
+  <SolidColorBrush x:Key="BrushGray1" Color="#545F66" />
+  <SolidColorBrush x:Key="BrushGray2" Color="#33363F" />
 
 </ResourceDictionary>

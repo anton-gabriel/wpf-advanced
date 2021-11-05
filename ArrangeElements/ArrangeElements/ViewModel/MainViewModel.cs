@@ -1,7 +1,7 @@
 ﻿namespace ArrangeElements.ViewModel
 {
   using ArrangeElements.Model.Enums;
-  using ArrangeElements.ViewModel.Commands;
+  using Prism.Commands;
   using System.Collections.ObjectModel;
   using System.Linq;
   using System.Windows.Input;
@@ -68,12 +68,27 @@
         new ConnectionViewModel(Elements.ElementAt(15),Elements.ElementAt(16)),//l2 - t2
       };
 
-      ArrangeCommand = new ArrangeCommand(Elements, Connections);
+
+      ToggleTooltipCommand = new DelegateCommand(() => ShowTooltip = !ShowTooltip);
+      HideTooltipCommand = new DelegateCommand(() => ShowTooltip = false);
     }
 
     public ObservableCollection<ElementViewModel> Elements { get; set; }
     public ObservableCollection<ConnectionViewModel> Connections { get; set; }
 
-    public ICommand ArrangeCommand { get; }
+
+    private bool _ShowTooltip;
+    public bool ShowTooltip
+    {
+      get => _ShowTooltip;
+      private set
+      {
+        _ShowTooltip = value;
+        OnPropertyChanged();
+      }
+    }
+
+    public ICommand ToggleTooltipCommand { get; }
+    public ICommand HideTooltipCommand { get; }
   }
 }

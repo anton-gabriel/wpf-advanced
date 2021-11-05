@@ -1,9 +1,9 @@
 ﻿namespace ArrangeElements.View.Behavior
 {
+  using Microsoft.Xaml.Behaviors;
   using System.Windows;
   using System.Windows.Input;
   using System.Windows.Media;
-  using Microsoft.Xaml.Behaviors;
 
   public sealed class ZoomBehavior : Behavior<FrameworkElement>
   {
