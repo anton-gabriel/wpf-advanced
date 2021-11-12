@@ -214,6 +214,9 @@
       }
     }
 
-
+    private void ShutDown(object sender, RoutedEventArgs e)
+    {
+      Close();
+    }
   }
 }

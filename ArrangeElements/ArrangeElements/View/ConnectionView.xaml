@@ -17,7 +17,10 @@
     <converters:GeometryConverter x:Key="GeometryConverter" />
   </UserControl.Resources>
 
-  <Path Stroke="#199489" StrokeThickness="2">
+  <Path
+    Stroke="#199489"
+    StrokeDashArray="5 1"
+    StrokeThickness="2">
     <Path.Data>
       <MultiBinding Converter="{StaticResource ResourceKey=GeometryConverter}">
         <Binding Path="First.X" />

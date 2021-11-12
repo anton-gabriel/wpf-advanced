@@ -3,6 +3,7 @@
   using ArrangeElements.Model.Enums;
   using System;
   using System.Collections.Generic;
+  using System.Collections.ObjectModel;
   using System.Windows;
 
   public sealed class ElementViewModel : NotifyPropertyChanged, IEquatable<ElementViewModel>
@@ -12,10 +13,16 @@
     {
       Id = _Id += 1;
       Category = category;
+      ConnectionPoints = new ObservableCollection<PointConnectionVM>();
+      ConnectionPoints.Add(new PointConnectionVM());
+      ConnectionPoints.Add(new PointConnectionVM());
+      ConnectionPoints.Add(new PointConnectionVM());
     }
 
     private double _X;
     private double _Y;
+
+    public ObservableCollection<PointConnectionVM> ConnectionPoints { get; }
 
     public long Id { get; }
     public ElementCategory Category { get; }

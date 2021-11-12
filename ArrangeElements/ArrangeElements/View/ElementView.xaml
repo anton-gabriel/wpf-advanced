@@ -40,13 +40,6 @@
     </Style>
   </UserControl.Style>
 
-  <behaviors:Interaction.Triggers>
-    <behaviors:EventTrigger EventName="MouseDoubleClick">
-      <behaviors:InvokeCommandAction Command="{Binding Path=SetImageCommand, Mode=OneWay}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ElementView}}, Path=DataContext}" />
-    </behaviors:EventTrigger>
-  </behaviors:Interaction.Triggers>
-
-
   <Grid>
     <Grid.Style>
       <Style TargetType="{x:Type Grid}">
@@ -97,9 +90,25 @@
       </ToolTip>
     </Grid.ToolTip>
     <Grid
-      Width="30"
-      Height="30"
-      Background="{Binding Path=Category, Mode=OneWay, Converter={StaticResource ResourceKey=CategoryColorConverter}}" />
+      Width="50"
+      Height="50"
+      Background="{Binding Path=Category, Mode=OneWay, Converter={StaticResource ResourceKey=CategoryColorConverter}}">
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+
+      <local:ElementPointsView
+        Grid.Column="0"
+        Margin="-5,0,0,0"
+        VerticalAlignment="Center" />
+      <local:ElementPointsView
+        Grid.Column="2"
+        Margin="0,0,-5,0"
+        VerticalAlignment="Center" />
+    </Grid>
 
     <TextBlock
       HorizontalAlignment="Center"
