@@ -1,9 +1,12 @@
 ﻿namespace ArrangeElements.ViewModel
 {
+  using ArrangeElements.Model;
   using ArrangeElements.Model.Enums;
   using Prism.Commands;
+  using System.Collections.Generic;
   using System.Collections.ObjectModel;
   using System.Linq;
+  using System.Windows;
   using System.Windows.Input;
 
   public sealed class MainViewModel : NotifyPropertyChanged
@@ -90,5 +93,18 @@
 
     public ICommand ToggleTooltipCommand { get; }
     public ICommand HideTooltipCommand { get; }
+
+    private DelegateCommand arrangeCommand;
+    public ICommand ArrangeCommand => arrangeCommand ??= new DelegateCommand(Arrange);
+
+    private void Arrange()
+    {
+      IEnumerable<Point> result = LayoutAlgorithm.DoTopologicalSort(Elements, Connections);
+      for (int index = 0; index < Elements.Count; index++)
+      {
+        Elements[index].X = result.ElementAt(index).X;
+        Elements[index].Y = result.ElementAt(index).Y;
+      }
+    }
   }
 }

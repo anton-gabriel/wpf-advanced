@@ -56,8 +56,6 @@
       VerticalScrollBarVisibility="Auto">
 
       <Grid x:Name="Container" Background="Transparent">
-
-
         <behaviors:Interaction.Behaviors>
           <behavior:ZoomBehavior />
         </behaviors:Interaction.Behaviors>
@@ -86,9 +84,14 @@
     </ScrollViewer>
 
     <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+
       <Grid
         x:Name="LogGrid"
-        Grid.Row="1"
+        Grid.Column="0"
         Height="25"
         Background="{StaticResource ResourceKey=BrushGray1}">
         <behaviors:Interaction.Triggers>
@@ -97,11 +100,22 @@
           </behaviors:EventTrigger>
         </behaviors:Interaction.Triggers>
         <TextBlock
+          Grid.Column="0"
           Margin="5,0,0,0"
           VerticalAlignment="Center"
           FontWeight="Bold"
           Foreground="{StaticResource ResourceKey=BrushWhite1}"
           Text="Log" />
+
+        <Button
+          Grid.Column="1"
+          Background="{x:Null}"
+          BorderBrush="{x:Null}"
+          BorderThickness="0"
+          Command="{Binding Path=ArrangeCommand, Mode=OneWay}"
+          Content="Arrange"
+          FontWeight="Bold"
+          Foreground="{StaticResource ResourceKey=BrushBlack1}" />
 
       </Grid>
 
